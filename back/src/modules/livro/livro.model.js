@@ -1,12 +1,13 @@
-import mongoose from 'mongoose';
+const mongoose = require('../../config/mongo.js');   
 const { Schema } = mongoose;
 
-const livroSchema = new Schema({
-    id: Number,
-    titulo: String,
-    paginas: Number,
-    isbn: Number,
-    editora: String
+const livroSchema = new Schema(
+    {
+        id: String,
+        titulo: String,
+        paginas: String,
+        isbn: String,
+        editora: String
     },
     { 
         timestamps: true 
@@ -15,4 +16,4 @@ const livroSchema = new Schema({
 
 const LivroModel = mongoose.model('livros', livroSchema);
 
-export default LivroModel;
+module.exports =  LivroModel;
