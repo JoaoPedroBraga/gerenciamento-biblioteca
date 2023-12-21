@@ -24,7 +24,21 @@ app.post('/livros', async (req, res) => {
     if (!req.body.editora){
         return res.status(400).json({ message: "O campo editora e obrigtório"})   
     }
-    return  res.status(201).json([]);
+
+    const livroExisente = await LivroModel.find({ id: req.body.id, titulo: req.body.titulo});
+    if (livroExisente.length) {
+        return res.status(200).json({ message:"Livro ou ID Exisente"});
+    }
+
+    const livro = await LivroModel.create({
+        id: req.body.id,
+        titulo: req.body.titulo,
+        paginas: req.body.paginas,
+        isbn: req.body.isbn,
+        editora: req.body.editora
+    });
+
+    return  res.status(201).json(livro);
 });
 
 app.listen(8080, () => {    
