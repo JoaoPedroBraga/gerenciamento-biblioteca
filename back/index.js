@@ -1,7 +1,10 @@
 const express = require('express');
+const cors = require('cors')
 const LivroModel = require('./src/modules/livro/livro.model.js');      
-const app = express();    
+const app = express();
+    
 app.use(express.json());
+app.use(cors())
 
 app.get('/livros', async  (req, res) => {
     const livros = await LivroModel.find({});
