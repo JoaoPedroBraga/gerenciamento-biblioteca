@@ -23,7 +23,7 @@ const LivrosCadastro = () => {
         document.getElementById('formulario').reset
       })
       .catch(({response:{data,status}})=>{
-        alert(`${status} - ${data}`)      
+        alert(`O erro é ${status} - ${data}`)      
       });
     }
 

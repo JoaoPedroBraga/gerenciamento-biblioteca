@@ -3,9 +3,9 @@ const { Schema } = mongoose;
 
 const livroSchema = new Schema(
     {
-        id: String,
+        id: Number,
         titulo: String,
-        paginas: String,
+        num_paginas: Number,
         isbn: String,
         editora: String
     },
