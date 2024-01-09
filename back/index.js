@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors')
 const LivroModel = require('./src/modules/livro/livro.model.js');      
 const app = express();
@@ -44,6 +45,33 @@ app.get('/livros', async  (req, res) => {
     return  res.status(200).json(livros);
 });
 
+app.get('/livros/:id', async (req, res) => {
+    try {
+        const livro = await LivroModel.findOne({id: req.params.id});
+        return res.status(200).json({
+            data: livro
+        });
+    }catch (erro) { 
+        return res.status(400).json({
+            data: [],
+            message:'Não foi possivel encontrar ID'
+        });
+    }
+});
+
+app.put('/livros/:id', async (req, res) => {
+    // if (!mongoose.isValidObjectId(req.params.id)) {
+    //     return res.status(400).json({
+    //         data: {},
+    //         message:'Não corresponde ao um ID valido'
+    //     });
+    // }
+    const livro = await LivroModel.updateOne({id: req.params.id}, req.body);
+
+    return res.status(200).json({
+        data: livro
+    });
+});
 
 
 app.listen(8080, () => {    
